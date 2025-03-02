@@ -1,4 +1,12 @@
-import { Calendar, Home, Inbox, Search, ChevronRight, Plus } from "lucide-react"
+"use client"
+import {
+  Calendar,
+  Home,
+  Inbox,
+  Search,
+  ChevronRight,
+  Plus,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -17,16 +25,17 @@ import {
   SidebarHeader,
   SidebarSeparator,
   SidebarMenuBadge,
-} from "@/components/ui/sidebar"
+  SidebarRail,
+  useSidebar
+} from "@/components/shadcn-ui/sidebar";
 
 import {
-    Collapsible,
-    CollapsibleContent,
-    CollapsibleTrigger,
-  } from "@/components/ui/collapsible"
-  
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/shadcn-ui/collapsible";
 
-import { AppDropdownMenu } from "./app-dropdownmenu"
+import { AppDropdownMenu } from "./app-dropdownmenu";
 
 // Menu items.
 const items = [
@@ -40,44 +49,40 @@ const items = [
     url: "#",
     icon: Inbox,
   },
-]
+];
 
 const menus = [
-    {
-        title: "Burger",
-        url: "#",
-        icon: Calendar,
-    },
-    {
-        title: "Tacos",
-        url: "#",
-        icon: Search,
-    },
-]
+  {
+    title: "Burger",
+    url: "#",
+    icon: Calendar,
+  },
+  {
+    title: "Tacos",
+    url: "#",
+    icon: Search,
+  },
+];
 
 export function AppSidebar() {
+  const { state } = useSidebar()
+  
   return (
-    <Sidebar>
+    <Sidebar variant="sidebar" collapsible="icon">
+      {/* SIDEBAR HEADER */}
 
-    {/* SIDEBAR HEADER */}
-    <SidebarHeader>
-        Humanity
-    </SidebarHeader>
+      {/* <SidebarSeparator /> */}
 
-    <SidebarSeparator />
-
-
-        {/* SIDEBAR CONTENT */}
+      <SidebarHeader>Humanity</SidebarHeader>
+      {/* SIDEBAR CONTENT */}
 
       <SidebarContent>
-
         <SidebarGroup>
-
-        <SidebarGroupLabel>Projects</SidebarGroupLabel>
-            <SidebarGroupAction title="Add Project">
-                <Plus /> <span className="sr-only">Add Project</span>
-            </SidebarGroupAction>
-        <SidebarGroupContent />
+          <SidebarGroupLabel>Projects</SidebarGroupLabel>
+          <SidebarGroupAction title="Add Project">
+            <Plus /> <span className="sr-only">Add Project</span>
+          </SidebarGroupAction>
+          <SidebarGroupContent />
 
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -111,74 +116,61 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
 
-            <SidebarMenuButton>
-                Regional
-            </SidebarMenuButton>
-            <SidebarMenuSub>
-                <SidebarMenuSubItem>
-                    <SidebarMenuSubButton>
-                        Chinnese
-                    </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
-                <SidebarMenuSubItem>
-                    <SidebarMenuSubButton>
-                        Indonesian
-                    </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
-            </SidebarMenuSub>
+          <SidebarGroupLabel>Regional</SidebarGroupLabel>
+          <SidebarMenuSub>
+            <SidebarMenuSubItem>
+              <SidebarMenuSubButton>Chinnese</SidebarMenuSubButton>
+            </SidebarMenuSubItem>
+            <SidebarMenuSubItem>
+              <SidebarMenuSubButton>Indonesian</SidebarMenuSubButton>
+            </SidebarMenuSubItem>
+          </SidebarMenuSub>
 
-
-            <Collapsible className="group/collapsible">
-                <SidebarGroup>
-                    <SidebarGroupLabel
-                        asChild
-                        className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                    >
-                        <CollapsibleTrigger>
-                            Testing{" "}
-                            <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                        </CollapsibleTrigger>
-                    </SidebarGroupLabel>
-                </SidebarGroup>
-                <CollapsibleContent>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            {menus.map((item) => (
-                                <SidebarMenuItem key={item.title}>
-                                    {/* <SidebarMenuSkeleton /> */}
-                                    <SidebarMenuButton asChild isActive>
-                                        <a href={item.url}>
-                                            <item.icon />
-                                            <span>{item.title}</span>
-                                        </a>
-                                    </SidebarMenuButton>
-                                    <SidebarMenuBadge>24</SidebarMenuBadge>
-                                </SidebarMenuItem>
-                            ))}
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </CollapsibleContent>
-            </Collapsible>
-
+          <Collapsible className="group/collapsible">
+            <SidebarGroup>
+              <SidebarGroupLabel
+                asChild
+                className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              >
+                <CollapsibleTrigger>
+                  Testing{" "}
+                  <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                </CollapsibleTrigger>
+              </SidebarGroupLabel>
+            </SidebarGroup>
+            <CollapsibleContent>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {menus.map((item) => (
+                    <SidebarMenuItem key={item.title}>
+                      {/* <SidebarMenuSkeleton /> */}
+                      <SidebarMenuButton asChild isActive>
+                        <a href={item.url}>
+                          <item.icon />
+                          <span>{item.title}</span>
+                        </a>
+                      </SidebarMenuButton>
+                      <SidebarMenuBadge>24</SidebarMenuBadge>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </CollapsibleContent>
+          </Collapsible>
         </SidebarGroup>
-
-
       </SidebarContent>
 
 
+      {/* SIDE BAR FOOTER */}
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <AppDropdownMenu />
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
 
-
-
-        {/* SIDE BAR FOOTER */}
-        <SidebarFooter>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <AppDropdownMenu/>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarFooter>
-
-
+      <SidebarRail/>
     </Sidebar>
-  )
+  );
 }

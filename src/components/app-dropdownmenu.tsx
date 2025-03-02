@@ -5,11 +5,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/shadcn-ui/dropdown-menu";
 
 import {
     SidebarMenuButton,
-  } from "@/components/ui/sidebar"
+  } from "@/components/shadcn-ui/sidebar"
   
 
 export function AppDropdownMenu() {
