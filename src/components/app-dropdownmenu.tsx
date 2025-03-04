@@ -1,16 +1,13 @@
-import { User2, ChevronUp } from "lucide-react"
+"use client"
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/shadcn-ui/dropdown-menu";
-
-import {
-    SidebarMenuButton,
-  } from "@/components/shadcn-ui/sidebar"
-  
+} from "@/components/shadcn-ui/dropdown-menu"
+import { SidebarMenuButton } from "@/components/shadcn-ui/sidebar"
+import { ChevronUp, User2 } from "lucide-react"
 
 export function AppDropdownMenu() {
   return (
@@ -23,8 +20,7 @@ export function AppDropdownMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         side="top"
-        className="w-[--radix-popper-anchor-width]"
-      >
+        className="w-[--radix-popper-anchor-width]">
         <DropdownMenuItem>
           <span>Account</span>
         </DropdownMenuItem>
@@ -36,5 +32,5 @@ export function AppDropdownMenu() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }
